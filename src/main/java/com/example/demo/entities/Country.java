@@ -26,6 +26,8 @@ public class Country {
 
     private String countryCode;
 
+    private String currency;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rate_id", referencedColumnName = "id")
     private EuroExchangeRates euroExchangeRates;
@@ -56,4 +58,11 @@ public class Country {
         this.countryCode = countryCode;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }
