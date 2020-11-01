@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +18,9 @@ public class EuroExchangeRates {
     private long id;
     private String currencyExchangePair;
     private long value;
+
+    @OneToOne(mappedBy = "euroExchangeRates")
+    private Country country;
 
     public long getId() {
         return id;

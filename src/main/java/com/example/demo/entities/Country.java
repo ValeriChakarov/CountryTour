@@ -1,10 +1,15 @@
 package com.example.demo.entities;
 
+import org.apache.tomcat.jni.Address;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +25,10 @@ public class Country {
 
 
     private String countryCode;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rate_id", referencedColumnName = "id")
+    private EuroExchangeRates euroExchangeRates;
 
     public int getId() {
         return id;
