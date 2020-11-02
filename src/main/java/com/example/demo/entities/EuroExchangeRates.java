@@ -15,18 +15,28 @@ public class EuroExchangeRates {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
+
+
     private String currencyExchangePair;
-    private long value;
 
-    @OneToOne(mappedBy = "euroExchangeRates")
-    private Country country;
 
-    public long getId() {
+    private Double value;
+
+
+
+
+
+
+
+//    @OneToOne(mappedBy = "euroExchangeRates")
+//    private Country country;
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,12 +49,12 @@ public class EuroExchangeRates {
         this.currencyExchangePair = currencyExchangePair;
     }
 
-    @Column(name = "value", unique = true, nullable = false)
-    public long getValue() {
+    @Column(name = "value", unique = true, nullable = false, precision = 2)
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(long value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 }

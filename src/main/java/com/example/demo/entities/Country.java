@@ -28,9 +28,9 @@ public class Country {
 
     private String currency;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rate_id", referencedColumnName = "id")
-    private EuroExchangeRates euroExchangeRates;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "rate_id", referencedColumnName = "id")
+//    private EuroExchangeRates euroExchangeRates;
 
     public int getId() {
         return id;

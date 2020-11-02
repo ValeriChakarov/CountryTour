@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Country;
 import com.example.demo.repos.CountryRepository;
+import com.example.demo.repos.EuroExchangeRatesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,9 @@ public class CountryController {
     @Autowired
     private CountryRepository countryRepo;
 
+    @Autowired
+    private EuroExchangeRatesRepository exchangeRatesRepository;
+
     //Home Page
     @GetMapping("/")
     public String welcome()
@@ -30,7 +34,7 @@ public class CountryController {
     }
 
     // Get All Notes
-    @GetMapping("/getListOfCountries")
+    @GetMapping("/getAllCountries")
     public List<Country> getListOfAllCountries()
     {
         return countryRepo.findAll();
@@ -43,15 +47,23 @@ public class CountryController {
         return countryRepo.findById(id);
     }
 
-    @GetMapping("/country/calculateBudget")
-    @ResponseBody
-    public String getTotalBudget(@RequestParam String startingCountry, String budgetPerCountry, String totalBudget, String currency) {
-        String theFinalString = "Starting Country: " + startingCountry + "\n" +
-                                "Budget per Country:" +  budgetPerCountry + "\n" +
-                                "Total Budget:" + totalBudget + "\n" +
-                                "Currency:" + currency;
-        return theFinalString;
-    }
+//    @GetMapping("/country/calculateBudget")
+//    @ResponseBody
+//    public String getTotalBudget(@RequestParam String startingCountry, String budgetPerCountry, String totalBudget, String currency) {
+////        String theFinalString = "Starting Country: " + startingCountry + "\n" +
+////                                "Budget per Country:" +  budgetPerCountry + "\n" +
+////                                "Total Budget:" + totalBudget + "\n" +
+////                                "Currency:" + currency;
+//        String theFinalString = "";
+//        StringBuffer  theFinalStringBuff = new StringBuffer(theFinalString);
+//        int count = 0;
+//        while(count < exchangeRatesRepository.count()){
+//            theFinalStringBuff.append(exchangeRatesRepository.findAll().get(count).getCurrencyExchangePair() + ":" + exchangeRatesRepository.findAll().get(count).getValue()*Double.valueOf(budgetPerCountry) + "\n");
+//            count++;
+//        }
+//
+//        return theFinalStringBuff.toString();
+//    }
 
     @PostMapping("/country/addCountry")
     public Country addCountry(@RequestBody Country newCountry){
@@ -59,10 +71,11 @@ public class CountryController {
 
     }
 
-    @DeleteMapping("/deleteCountryById")
+    @DeleteMapping("/country/deleteCountryById")
     public void deleteCountryById(
             @RequestParam int id)
     {
         countryRepo.deleteById(id);
     }
+
 }
